@@ -3,6 +3,7 @@ const appExpress = express();
 const bodyParser = require("body-parser");
 const connection = require("./database/database");
 const modelPergunta = require("./database/Pergunta");
+const modelResposta = require("./database/Resposta");
 
 connection
     .authenticate()
@@ -50,14 +51,31 @@ appExpress.get("/pergunta/:id", (req, res) => {
         where: { id: id }
     }).then(pergunta => {
         if(pergunta != undefined) {
-            res.render("pergunta", {
-                pergunta: pergunta
-            });
+            modelResposta.findAll({
+                where: { perguntaId: pergunta.id },
+                order: [['id', 'DESC']]
+            }).then(respostas => {
+                res.render("pergunta", {
+                    pergunta: pergunta,
+                    respostas: respostas
+                });
+            })
         }else {
             res.redirect("/");
         }
     })
 })
+
+appExpress.post("/responder", (req, res) => {
+    const corpo = req.body.corpo;
+    const perguntaId = req.body.pergunta;
+    modelResposta.create({
+        corpo: corpo,
+        perguntaId: perguntaId
+    }).then(() => {
+        res.redirect("/pergunta/" + perguntaId);
+    })
+});
 
 appExpress.listen(8181, () => {
   console.log("App rodando");

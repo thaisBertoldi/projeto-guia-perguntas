@@ -15,3 +15,18 @@ body {
 .card-perguntas {
     margin-top: 5vh;
 }
+
+.form-resposta {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.botao-resposta {
+    width: 30%;
+}
+
+.card-resposta {
+    margin-bottom: 10px;
+}
