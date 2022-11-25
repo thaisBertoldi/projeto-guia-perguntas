@@ -1,0 +1,9 @@
+.form-style {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+body {
+    background-color: #eceff173;
+}

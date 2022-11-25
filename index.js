@@ -1,19 +1,17 @@
 const express = require("express");
 const appExpress = express();
 
-appExpress.set('view engine', 'ejs');
+appExpress.set("view engine", "ejs");
+appExpress.use(express.static('public'));
 
-appExpress.get("/:nome/:language", (req, res) => {
-    const nome = req.params.nome;
-    const language = req.params.language;
-    res.render("index", {
-        nome: nome,
-        lang: language,
-        empresa: "Guia do Programador",
-        inscritos: 50
-    });
+appExpress.get("/", (req, res) => {
+  res.render("index", {});
 });
 
+appExpress.get("/perguntar", (req, res) => {
+    res.render("perguntar");
+  });
+
 appExpress.listen(8181, () => {
-    console.log("App rodando");
+  console.log("App rodando");
 });
