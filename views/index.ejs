@@ -1,5 +1,20 @@
 <%-include('partials/header.ejs') %>
   <body>
     <%-include('partials/navbar.ejs') %>
+    <div class="container">
+        <h1>Perguntas</h1>
+        <% perguntas.forEach(pergunta => { %>
+            <div class="card card-perguntas">
+                <div class="card-body">
+                    <h3><%= pergunta.titulo %></h3>
+                    <p><%= pergunta.descricao %></p>
+                  </div>
+                  <div class="card-footer">
+                    <a href="/pergunta/<%= pergunta.id %>"><button class="btn btn-dark">Responder</button></a>
+                  </div>
+            </div>
+        <% }) %>
+    </div>
+
   </body>
 <%-include('partials/scripts.ejs') %>
